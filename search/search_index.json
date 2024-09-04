@@ -1,1 +1,1 @@
-{"config":{"indexing":"full","lang":["en"],"min_search_length":3,"prebuild_index":false,"separator":"[\\s\\-]+"},"docs":[]}
+{"config":{"lang":["en"],"separator":"[\\s\\-]+","pipeline":["stopWordFilter"]},"docs":[{"location":"","title":"Documentation","text":"<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam nec nulla ac nunc ultricies tincidunt. </p>"}]}
