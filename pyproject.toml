@@ -1,0 +1,43 @@
+[tool.poetry]
+name = "django-semantic-search"
+version = "0.0.1"
+description = "Bringing semantic search to Django. Integrates seemlessly with Django ORM."
+authors = ["Kacper Łukawski <lukawski.kacper@gmail.com>"]
+license = "Apache-2.0"
+readme = "README.md"
+packages = [
+    { include = "django_semantic_search", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^5.1"
+qdrant-client = "^1.11.1"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^3.8.0"
+ruff = "^0.6.2"
+pytest = "^8.3.2"
+mkdocs = "^1.6.1"
+
+[tool.poetry.group.qdrant.dependencies]
+qdrant-client = "^1.11.1"
+
+[tool.poetry.group.sentence-transformers.dependencies]
+sentence-transformers = "^3.0.1"
+
+[tool.pytest.ini_options]
+minversion = "7.1"
+pythonpath = [
+    "src/"
+]
+testpaths = [
+    "tests/"
+]
+
+[tool.ruff]
+lint.typing-modules = ["cibuildwheel.typing"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
