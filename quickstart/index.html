@@ -10,26 +10,28 @@
       
       
       
-        <link rel="canonical" href="https://kacperlukawski.github.io/django-semantic-search/">
+        <link rel="canonical" href="https://kacperlukawski.github.io/django-semantic-search/quickstart/">
       
       
+        <link rel="prev" href="..">
       
-        <link rel="next" href="quickstart/">
+      
+        <link rel="next" href="../usage/">
       
       
-      <link rel="icon" href="assets/favicon.png">
+      <link rel="icon" href="../assets/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.34">
     
     
       
-        <title>django-semantic-search</title>
+        <title>Quickstart - django-semantic-search</title>
       
     
     
-      <link rel="stylesheet" href="assets/stylesheets/main.35f28582.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.35f28582.min.css">
       
         
-        <link rel="stylesheet" href="assets/stylesheets/palette.06af60db.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.06af60db.min.css">
       
       
 
@@ -48,9 +50,9 @@
       
     
     
-      <link rel="stylesheet" href="assets/_mkdocstrings.css">
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL(".",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
@@ -59,11 +61,11 @@
       
         <meta  property="og:type"  content="website" >
       
-        <meta  property="og:title"  content="Home" >
+        <meta  property="og:title"  content="Quickstart - django-semantic-search" >
       
         <meta  property="og:description"  content="Bringing semantic search to Django. Integrates seamlessly with Django ORM." >
       
-        <meta  property="og:image"  content="https://kacperlukawski.github.io/django-semantic-search/assets/images/social/index.png" >
+        <meta  property="og:image"  content="https://kacperlukawski.github.io/django-semantic-search/assets/images/social/quickstart.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -71,15 +73,15 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://kacperlukawski.github.io/django-semantic-search/" >
+        <meta  property="og:url"  content="https://kacperlukawski.github.io/django-semantic-search/quickstart/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
-        <meta  name="twitter:title"  content="Home" >
+        <meta  name="twitter:title"  content="Quickstart - django-semantic-search" >
       
         <meta  name="twitter:description"  content="Bringing semantic search to Django. Integrates seamlessly with Django ORM." >
       
-        <meta  name="twitter:image"  content="https://kacperlukawski.github.io/django-semantic-search/assets/images/social/index.png" >
+        <meta  name="twitter:image"  content="https://kacperlukawski.github.io/django-semantic-search/assets/images/social/quickstart.png" >
       
     
     
@@ -102,7 +104,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#django-semantic-search" class="md-skip">
+        <a href="#1-install-django-semantic-search" class="md-skip">
           Skip to content
         </a>
       
@@ -116,9 +118,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="." title="django-semantic-search" class="md-header__button md-logo" aria-label="django-semantic-search" data-md-component="logo">
+    <a href=".." title="django-semantic-search" class="md-header__button md-logo" aria-label="django-semantic-search" data-md-component="logo">
       
-  <img src="assets/logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -135,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Home
+              Quickstart
             
           </span>
         </div>
@@ -242,11 +244,9 @@
         
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
-      <a href="." class="md-tabs__link">
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
         
   
     
@@ -261,9 +261,11 @@
         
   
   
+    
   
-    <li class="md-tabs__item">
-      <a href="quickstart/" class="md-tabs__link">
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
         
   
     
@@ -280,7 +282,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="usage/" class="md-tabs__link">
+      <a href="../usage/" class="md-tabs__link">
         
   
     
@@ -299,7 +301,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="api/documents/" class="md-tabs__link">
+        <a href="../api/documents/" class="md-tabs__link">
           
   
   API Reference
@@ -334,9 +336,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="." title="django-semantic-search" class="md-nav__button md-logo" aria-label="django-semantic-search" data-md-component="logo">
+    <a href=".." title="django-semantic-search" class="md-nav__button md-logo" aria-label="django-semantic-search" data-md-component="logo">
       
-  <img src="assets/logo.png" alt="logo">
+  <img src="../assets/logo.png" alt="logo">
 
     </a>
     django-semantic-search
@@ -360,6 +362,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -369,25 +391,23 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
-        
-      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Home
+    Quickstart
   </span>
   
 
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <a href="." class="md-nav__link md-nav__link--active">
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    Home
+    Quickstart
   </span>
   
 
@@ -399,8 +419,6 @@
   
   
   
-    
-  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -409,101 +427,65 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#1-install-django-semantic-search" class="md-nav__link">
     <span class="md-ellipsis">
-      Installation
+      1. Install django-semantic-search
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#supported-tools" class="md-nav__link">
+  <a href="#2-modify-the-django-settings" class="md-nav__link">
     <span class="md-ellipsis">
-      Supported tools
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Supported tools">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#vector-search-engines" class="md-nav__link">
-    <span class="md-ellipsis">
-      Vector search engines
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#embedding-models" class="md-nav__link">
-    <span class="md-ellipsis">
-      Embedding models
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#configuration" class="md-nav__link">
-    <span class="md-ellipsis">
-      Configuration
+      2. Modify the Django settings
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#quickstart" class="md-nav__link">
+  <a href="#3-choose-the-vector-search-engine-and-the-embedding-model" class="md-nav__link">
     <span class="md-ellipsis">
-      Quickstart
+      3. Choose the vector search engine and the embedding model
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#examples" class="md-nav__link">
+  <a href="#4-create-a-model-class" class="md-nav__link">
     <span class="md-ellipsis">
-      Examples
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Examples">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#simple-django-app" class="md-nav__link">
-    <span class="md-ellipsis">
-      Simple Django App
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Simple Django App">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    <span class="md-ellipsis">
-      Prerequisites
+      4. Create a model class
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#5-define-document-class-for-the-selected-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Define document class for the selected model
+    </span>
+  </a>
   
 </li>
-        
-      </ul>
-    </nav>
+      
+        <li class="md-nav__item">
+  <a href="#6-create-and-store-the-instances-of-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Create and store the instances of the model
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-search-for-the-instances-of-the-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Search for the instances of the model
+    </span>
+  </a>
   
 </li>
       
@@ -522,27 +504,7 @@
   
   
     <li class="md-nav__item">
-      <a href="quickstart/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Quickstart
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-    
-      
-      
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="usage/" class="md-nav__link">
+      <a href="../usage/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -600,7 +562,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/documents/" class="md-nav__link">
+      <a href="../api/documents/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -621,7 +583,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/backends/" class="md-nav__link">
+      <a href="../api/backends/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -642,7 +604,7 @@
   
   
     <li class="md-nav__item">
-      <a href="api/embeddings/" class="md-nav__link">
+      <a href="../api/embeddings/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -681,97 +643,65 @@
   
 
 
-<h1 id="django-semantic-search">django-semantic-search</h1>
-<p><a href="https://pypi.python.org/pypi/django-semantic-search/"><img alt="Latest PyPI version" src="https://img.shields.io/pypi/v/django-semantic-search.svg?style=flat-square" /></a>
-<a href="https://github.com/kacperlukawski/django-semantic-search/LICENSE"><img alt="GitHub License" src="https://img.shields.io/github/license/kacperlukawski/django-semantic-search" /></a></p>
-<div class="admonition note">
-<p>Bringing semantic search to Django. Integrates seamlessly with Django ORM.</p>
-</div>
-<p>Django built-in search capabilities are rather limited. Finding a relevant instance of a model relies on the relational 
-database's search capabilities, like SQL <code>LIKE</code> queries. This is not ideal for high-quality search results. This library 
-aims to provide a semantic search capability to Django, allowing for more relevant search results. All this is done in
-a Django-friendly way, integrating with Django ORM.</p>
-<p>The library does not aim to provide all the features of search engines, but rather to provide a simple way to integrate
-Django applications with semantic search capabilities, using existing vector search engines, a.k.a. vector databases,
-and embedding models.</p>
-<h2 id="installation">Installation</h2>
+  <h1>Quickstart</h1>
+
+<p>This quickstart guide will help you to get started with the <code>django-semantic-search</code> library. It will guide you through 
+the installation process, the configuration of the vector search engine and the embedding model, and the definition of 
+documents for the selected model.</p>
+<p>Assuming you already have a Django project set up, let's get started.</p>
+<h2 id="1-install-django-semantic-search">1. Install django-semantic-search</h2>
 <p>The <code>django-semantic-search</code> library can be installed via your favorite package manager. For example, using <code>pip</code>:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-semantic-search
 </span></code></pre></div>
-<p>The current version is still experimental, and the API may change in the future.</p>
-<h2 id="supported-tools">Supported tools</h2>
-<p><code>django-semantic-search</code> has to cooperate with other tools to provide semantic search capabilities. You have to choose
-a vector search engine and an embedding model to use with the library, and configure them in the Django settings.</p>
-<h3 id="vector-search-engines">Vector search engines</h3>
-<p>The library supports the following vector search engines:</p>
-<ul>
-<li><a href="api/backends/#qdrant">Qdrant</a></li>
-</ul>
-<p>If you would like to contribute support for another vector search engine, feel free to create a pull request.</p>
-<h3 id="embedding-models">Embedding models</h3>
-<p>Choosing the right embedding model is crucial for the quality of the search results. The current version of the library
-focuses on bringing the semantic search capabilities to Django, and provides just a single integration with the
-vector embedding models:</p>
-<ul>
-<li><a href="api/embeddings/#sentence-transformers">Sentence Transformers</a></li>
-</ul>
-<p>In web-based applications, it makes a lot of sense to choose an external service for the embedding model, as it can be
-resource-intensive. Please do expect that the library will support more embedding models in the future, and will provide
-a way to integrate them with Django.</p>
-<p>Again, if you would like to contribute support for another embedding model, feel free to create a pull request.</p>
-<h2 id="configuration">Configuration</h2>
-<p>As with any Django application, you need to add the library to the <code>INSTALLED_APPS</code> list in the <code>settings.py</code> file of
-your project:</p>
-<div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="o">...</span><span class="p">,</span>  <span class="c1"># external apps, such as Django Rest Framework</span>
-</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s1">&#39;django_semantic_search&#39;</span><span class="p">,</span>
-</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="o">...</span><span class="p">,</span>  <span class="c1"># your custom apps, using django-semantic-search</span>
-</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="p">]</span>
+<p>The default installation does not include any vector search engine or embedding model, so you typically have to install
+the package with the desired support. For example, to install the package with <a href="https://qdrant.tech">Qdrant</a> and 
+<a href="https://www.sbert.net">Sentence Transformers</a> support, you can run:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-semantic-search<span class="o">[</span>qdrant,sentence-transformers<span class="o">]</span>
 </span></code></pre></div>
-<p>All the library configuration is also done in the <code>settings.py</code> file of the project, via the <code>SEMANTIC_SEARCH</code> 
-dictionary. Here is a full example of the configuration:</p>
-<div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">SEMANTIC_SEARCH</span> <span class="o">=</span> <span class="p">{</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="c1"># Vector store is a backend that stores the vectors and provides the search functionality.</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s2">&quot;vector_store&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="c1"># Either the path to the backend class or the class itself</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="s2">&quot;backend&quot;</span><span class="p">:</span> <span class="s2">&quot;django_semantic_search.backends.qdrant.QdrantBackend&quot;</span><span class="p">,</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="c1"># Configuration is passed directly to the backend class during initialization.</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:6333&quot;</span><span class="p">,</span>
-</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="p">},</span>
-</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="p">},</span>
-</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="c1"># Default embeddings are used to generate the embeddings for the documents if no embeddings are provided.</span>
-</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="c1"># For the time being, there is no way to provide embeddings for the documents, so the default embeddings</span>
-</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="c1"># are used for all the documents.</span>
-</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="s2">&quot;default_embeddings&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>        <span class="c1"># Either the path to the embeddings model class or the class itself</span>
-</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;django_semantic_search.embeddings.SentenceTransformerModel&quot;</span><span class="p">,</span>
-</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>        <span class="c1"># Configuration is passed directly to the embeddings model class during initialization.</span>
-</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
-</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>            <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span><span class="p">,</span>
-</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>        <span class="p">},</span>
-</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="p">},</span>
-</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="p">}</span>
+<h2 id="2-modify-the-django-settings">2. Modify the Django settings</h2>
+<p>Add the library to the <code>INSTALLED_APPS</code> list in the <code>settings.py</code> file of your project:</p>
+<div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="o">...</span><span class="p">,</span>  <span class="c1"># external apps, such as Django Rest Framework</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="s1">&#39;django_semantic_search&#39;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="o">...</span><span class="p">,</span>  <span class="c1"># your custom apps, using django-semantic-search</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="p">]</span>
 </span></code></pre></div>
-<h2 id="quickstart">Quickstart</h2>
-<p>If you would like to be guided step-by-step through the installation and configuration process, please refer to the
-<a href="quickstart/">Quickstart</a> guide.</p>
-<h2 id="examples">Examples</h2>
-<p>If you prefer going straight to the code, you can check the <code>examples</code> folder. In the future it will contain more 
-examples of how to use the library, but for the time being, it contains just a simple Django project with a single
-app that demonstrates how to use the library.</p>
-<h3 id="simple-django-app">Simple Django App</h3>
-<p>The <code>examples</code> folder contains a minimal Django <code>simple_django_app</code> project using the <code>django-semantic-search</code> library.
-It shows how to configure semantic search in a Django project. The application defines a simple model and a document
-class for it, and demonstrates how to search for instances of the model using the library.</p>
-<h4 id="prerequisites">Prerequisites</h4>
-<p>By default, the <code>simple_django_app</code> project uses the <code>Qdrant</code> vector search engine and the <code>all-MiniLM-L6-v2</code> Sentence
-Transformers model. You have to install the <code>django-semantic-search</code> library with the <code>qdrant</code> and <code>sentence-transformers</code>
-extras to run the project. The dependencies might be installed from the requirements file:</p>
-<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>examples/simple_django_app/requirements.txt
+<h2 id="3-choose-the-vector-search-engine-and-the-embedding-model">3. Choose the vector search engine and the embedding model</h2>
+<p>Do not close the <code>settings.py</code> file yet. You need to configure the vector search engine and the embedding model. Add the
+<code>SEMANTIC_SEARCH</code> dictionary to the <code>settings.py</code> file of the project, with the desired configuration. Here is an 
+example of the configuration:</p>
+<div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">SEMANTIC_SEARCH</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Vector store is a backend that stores the vectors and provides the search functionality.</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="s2">&quot;vector_store&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="c1"># Either the path to the backend class or the class itself</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="s2">&quot;backend&quot;</span><span class="p">:</span> <span class="s2">&quot;django_semantic_search.backends.qdrant.QdrantBackend&quot;</span><span class="p">,</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="c1"># Configuration is passed directly to the backend class during initialization.</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="s2">&quot;location&quot;</span><span class="p">:</span> <span class="s2">&quot;http://localhost:6333&quot;</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="p">},</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="p">},</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="c1"># Default embeddings are used to generate the embeddings for the documents if no embeddings are provided.</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="c1"># For the time being, there is no way to provide embeddings for the documents, so the default embeddings</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="c1"># are used for all the documents.</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="s2">&quot;default_embeddings&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="c1"># Either the path to the embeddings model class or the class itself</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>        <span class="s2">&quot;model&quot;</span><span class="p">:</span> <span class="s2">&quot;django_semantic_search.embeddings.SentenceTransformerModel&quot;</span><span class="p">,</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>        <span class="c1"># Configuration is passed directly to the embeddings model class during initialization.</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>        <span class="s2">&quot;configuration&quot;</span><span class="p">:</span> <span class="p">{</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>            <span class="s2">&quot;model_name&quot;</span><span class="p">:</span> <span class="s2">&quot;sentence-transformers/all-MiniLM-L6-v2&quot;</span><span class="p">,</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>        <span class="p">},</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>    <span class="p">},</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="p">}</span>
 </span></code></pre></div>
-<p>The default configuration assumes that the Qdrant service is running on <code>localhost:6333</code>. Please refer to the Qdrant
-documentation on <a href="https://qdrant.tech/documentation/quickstart/#download-and-run">how to set up the service</a>.</p>
+<p>We defined the <code>Qdrant</code> vector search engine and the <code>all-MiniLM-L6-v2</code> embedding model. You can choose other models
+from the <a href="https://www.sbert.net">Sentence Transformers</a> library, for the time being.</p>
+<h2 id="4-create-a-model-class">4. Create a model class</h2>
+<h2 id="5-define-document-class-for-the-selected-model">5. Define document class for the selected model</h2>
+<p>TODO</p>
+<h2 id="6-create-and-store-the-instances-of-the-model">6. Create and store the instances of the model</h2>
+<p>TODO</p>
+<h2 id="7-search-for-the-instances-of-the-model">7. Search for the instances of the model</h2>
+<p>TODO</p>
 
 
 
@@ -821,10 +751,10 @@ documentation on <a href="https://qdrant.tech/documentation/quickstart/#download
     </div>
     
     
-    <script id="__config" type="application/json">{"base": ".", "features": ["search.suggest", "search.highlight", "toc.integrate", "navigation.tabs", "content.code.copy"], "search": "assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["search.suggest", "search.highlight", "toc.integrate", "navigation.tabs", "content.code.copy"], "search": "../assets/javascripts/workers/search.07f07601.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.56dfad97.min.js"></script>
+      <script src="../assets/javascripts/bundle.56dfad97.min.js"></script>
       
     
   </body>
