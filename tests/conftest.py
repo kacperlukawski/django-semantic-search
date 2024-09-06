@@ -10,6 +10,7 @@ def pytest_configure(config):
             "default": {
                 "ENGINE": "django.db.backends.sqlite3",
                 "NAME": ":memory:",
+                "AUTOCOMMIT": True,
             }
         },
         SEMANTIC_SEARCH={

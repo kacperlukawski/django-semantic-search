@@ -27,3 +27,7 @@ class IndexConfiguration:
     vectors: Dict[str, VectorConfiguration] = field(default_factory=dict)
     # Name of the property that contains the document id
     id_field: str = "id"
+
+    def __hash__(self):
+        frozen_vectors = frozenset(sorted(self.vectors.items()))
+        return hash(self.namespace) + hash(self.id_field) + hash(frozen_vectors)

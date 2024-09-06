@@ -56,7 +56,7 @@ class MockVectorSearchBackend(BaseVectorSearchBackend):
         max_results = min(
             limit, len(self._documents[self.index_configuration.namespace])
         )
-        selected_documents = random.choices(
+        selected_documents = random.sample(
             list(self._documents[self.index_configuration.namespace].values()),
             k=max_results,
         )

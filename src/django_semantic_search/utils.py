@@ -21,6 +21,7 @@ def load_embedding_model() -> BaseEmbeddingModel:
     return model_cls(**model_config)
 
 
+@cache
 def load_backend(index_configuration: IndexConfiguration):
     """
     Load the backend, as specified in the settings.

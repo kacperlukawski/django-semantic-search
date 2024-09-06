@@ -161,21 +161,17 @@ class BackendManager:
         return owner._backend
 
 
-class SearchManager(Generic[T]):
+class DocumentManager(Generic[T]):
     """
-    A descriptor to store an instance of the search manager on the document class. The search manager is used to find
-    similar documents in the vector index.
+    A descriptor to store an instance of the document manager on the document class. The document manager is used to
+    find similar documents in the vector index, but also to perform any other operations on the querysets of the
+    model instances.
     """
 
-    def __init__(self):
-        self.cls = None
+    def __init__(self, cls: Type["Document"]):
+        self.cls = cls
 
-    def __get__(self, instance: "Document", owner: Type["Document"]):
-        if self.cls is None:
-            self.cls = owner
-        return self
-
-    def find(
+    def search(
         self,
         limit: int = 10,
         **kwargs,
@@ -211,6 +207,26 @@ class SearchManager(Generic[T]):
             preserved_ids
         )
         return queryset
+
+    def index(self, qs: QuerySet[T]):
+        """
+        Index the queryset of the model instances.
+        :param qs: queryset of the model instances to index.
+        """
+        # TODO: this is the most basic implementation, it should be optimized
+        for instance in qs:
+            self.cls(instance).save()
+
+
+class DocumentManagerDescriptor(Generic[T]):
+    """
+    A descriptor to store the document manager on the document class.
+    """
+
+    def __get__(self, instance, owner):
+        if not hasattr(owner, "_document_manager"):
+            owner._document_manager = DocumentManager[T](owner)
+        return owner._document_manager
 
 
 class Document(abc.ABC, Generic[T]):
@@ -275,7 +291,7 @@ class Document(abc.ABC, Generic[T]):
     meta = MetaManager()
     index_configuration = IndexConfigurationManager()
     backend = BackendManager()
-    objects = SearchManager[T]()
+    objects: DocumentManager = DocumentManagerDescriptor[T]()
 
     def __init__(self, instance: T):
         self._instance = instance

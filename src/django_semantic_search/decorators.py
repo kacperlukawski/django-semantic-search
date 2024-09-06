@@ -36,7 +36,10 @@ def register_document(document_cls: Type[Document]) -> Type[Document]:
 
     # Set up the document class to initialize vector store
     index_configuration = document_cls.index_configuration
-    load_backend(index_configuration)
+    backend = load_backend(index_configuration)
+    logger.info(
+        f"Initializing vector store for {document_cls.meta.model} with backend {backend}"
+    )
 
     return document_cls
 
