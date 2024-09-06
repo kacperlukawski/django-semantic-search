@@ -10,6 +10,29 @@ from django_semantic_search.types import Vector
 class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
     """
     Sentence-transformers model for embedding text.
+
+    It is a wrapper around the sentence-transformers library. Users would rarely need to use this class directly, but
+    rather specify it in the Django settings.
+
+    **Requirements:**
+
+    ```shell
+    pip install django-semantic-search[sentence-transformers]
+    ```
+
+    **Usage:**
+
+    ```python title="settings.py"
+    SEMANTIC_SEARCH = {
+        "default_embeddings": {
+            "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+            "configuration": {
+                "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+            },
+        },
+        ...
+    }
+    ```
     """
 
     def __init__(

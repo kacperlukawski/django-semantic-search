@@ -24,13 +24,13 @@ class BaseVectorSearchBackend(abc.ABC):
 
     @abc.abstractmethod
     def search(
-        self, vector_name: str, query: List[float], top_k: int = 10
+        self, vector_name: str, query: List[float], limit: int = 10
     ) -> List[DocumentID]:
         """
         Search for the documents similar to the query vector in the backend.
         :param vector_name:
         :param query:
-        :param top_k:
+        :param limit:
         :return:
         """
         raise NotImplementedError

@@ -50,11 +50,11 @@ class MockVectorSearchBackend(BaseVectorSearchBackend):
         pass
 
     def search(
-        self, vector_name: str, query: Vector, top_k: int = 10
+        self, vector_name: str, query: Vector, limit: int = 10
     ) -> List[DocumentID]:
         random.seed(sum(query))
         max_results = min(
-            top_k, len(self._documents[self.index_configuration.namespace])
+            limit, len(self._documents[self.index_configuration.namespace])
         )
         selected_documents = random.choices(
             list(self._documents[self.index_configuration.namespace].values()),

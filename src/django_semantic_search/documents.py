@@ -177,13 +177,13 @@ class SearchManager(Generic[T]):
 
     def find(
         self,
-        top_k: int = 10,
+        limit: int = 10,
         **kwargs,
     ) -> QuerySet[T]:
         """
         Find the documents similar to the query in the vector index. If there are multiple indexes, the search is
         performed in all of them and the results are combined.
-        :param top_k: number of results to return.
+        :param limit: number of results to return.
         :param kwargs: query parameters to restrict the search.
         :return:
         """
@@ -199,7 +199,7 @@ class SearchManager(Generic[T]):
 
         query_embedding = vector_index.get_query_embedding(field_value)
         document_ids = self.cls.backend.search(
-            vector_index.index_name, query_embedding, top_k=top_k
+            vector_index.index_name, query_embedding, limit=limit
         )
         if not document_ids:
             return self.cls.meta.model.objects.none()
@@ -217,6 +217,56 @@ class Document(abc.ABC, Generic[T]):
     """
     Base class for all the documents. There is a one-to-one mapping between the document subclass and the model class,
     to configure how a specific model instances should be converted to a document.
+
+    **Usage**:
+
+    ```python title="products/models.py"
+    from django.db import models
+
+    class Product(models.Model):
+        name = models.CharField(max_length=255)
+        description = models.TextField()
+
+    ```
+
+    ```python title="products/documents.py"
+    from django_semantic_search import Document, VectorIndex
+    from django_semantic_search.decorators import register_document
+
+    @register_document
+    class ProductDocument(Document):
+        class Meta:
+            model = Product
+            indexes = [
+                VectorIndex("name"),
+                VectorIndex("description"),
+            ]
+    ```
+
+    `django-semantic-search` will automatically handle all the configuration in the backend. The `register_document`
+    decorator will register the model signals to update the documents in the vector store when the model is updated
+    or deleted. As a user you don't have to manually call the `save` or `delete` methods on the document instances.
+
+    **Search example:**
+
+    ```python title="products/views.py"
+    from django.http import JsonResponse
+    from products.documents import ProductDocument
+
+    def my_view(request):
+        query = "this is a query"
+        results = ProductDocument.objects.find(name=query)
+        return JsonResponse(
+            {
+                "results": list(name_results.values())
+            }
+        )
+    ```
+
+    The `find` method on the `objects` attribute of the document class will return the queryset of the model instances
+    that are similar to the query. The search is performed using the selected vector index passed as a keyword argument
+    to the `find` method. In our case, we are searching for the query in the `name` field of the `Product` model. If we
+    want to search in the `description` field, we would call `ProductDocument.objects.find(description=query)`.
     """
 
     # Important:
@@ -248,6 +298,10 @@ class Document(abc.ABC, Generic[T]):
 
     @property
     def id(self) -> DocumentID:
+        if not self._instance.pk:
+            raise ValueError(
+                "The model instance has to be saved before accessing the ID."
+            )
         return self._instance.pk
 
     def vectors(self) -> Dict[str, Vector]:

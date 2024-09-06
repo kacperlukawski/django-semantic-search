@@ -12,7 +12,30 @@ logger = logging.getLogger(__name__)
 
 class QdrantBackend(BaseVectorSearchBackend):
     """
-    Qdrant backend for vector search. It provides all the functionality to interact with Qdrant.
+    Backend that integrates with Qdrant vector database.
+
+    It handles the configuration of separate collections per each model we want to enable search for. Users rarely
+    interact with this backend directly, as backend is usually configured via Django settings.
+
+    **Requirements**:
+
+    ```bash
+    pip install django-semantic-search[qdrant]
+    ```
+
+    **Usage**:
+
+    ```python title="settings.py"
+    SEMANTIC_SEARCH = {
+        "vector_store": {
+            "backend": "django_semantic_search.backends.qdrant.QdrantBackend",
+            "configuration": {
+                "host": "http://localhost:6333",
+            },
+        },
+        ...
+    }
+    ```
     """
 
     from qdrant_client import models
@@ -58,13 +81,13 @@ class QdrantBackend(BaseVectorSearchBackend):
             )
 
     def search(
-        self, vector_name: str, query: List[float], top_k: int = 10
+        self, vector_name: str, query: List[float], limit: int = 10
     ) -> List[DocumentID]:
         results = self.client.query_points(
             collection_name=self.index_configuration.namespace,
             query=query,
             using=vector_name,
-            limit=top_k,
+            limit=limit,
             with_vectors=False,
             with_payload=True,
         )
