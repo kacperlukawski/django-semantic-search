@@ -474,6 +474,24 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#how-to-search-for-documents" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to search for documents?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-to-index-the-existing-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      How to index the existing data?
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -615,7 +633,7 @@
 
   <h1>Usage</h1>
 
-<p>This section focuses on specific usage examples of the <code>django-semantic-search</code> library. If you are looking for 
+<p>This section focuses on specific usage examples of the <code>django-semantic-search</code> library. If you are looking for
 a step-by-step introduction, please refer to the <a href="../quickstart/">Quickstart</a> guide.</p>
 <h2 id="configuration">Configuration</h2>
 <p>As with any Django application, you need to add the library to the <code>INSTALLED_APPS</code> list in the <code>settings.py</code> file of
@@ -626,7 +644,7 @@ your project:</p>
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="o">...</span><span class="p">,</span>  <span class="c1"># your custom apps, using django-semantic-search</span>
 </span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="p">]</span>
 </span></code></pre></div>
-<p>All the library configuration is also done in the <code>settings.py</code> file of the project, via the <code>SEMANTIC_SEARCH</code> 
+<p>All the library configuration is also done in the <code>settings.py</code> file of the project, via the <code>SEMANTIC_SEARCH</code>
 dictionary. Here is a full example of the configuration:</p>
 <div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">SEMANTIC_SEARCH</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># Vector store is a backend that stores the vectors and provides the search functionality.</span>
@@ -654,8 +672,8 @@ dictionary. Here is a full example of the configuration:</p>
 <h2 id="frequently-asked-questions">Frequently Asked Questions</h2>
 <p>This section describes some common questions and answers related to the <code>django-semantic-search</code> library.</p>
 <h3 id="how-to-define-which-fields-are-searchable">How to define which fields are searchable?</h3>
-<p>To define the search fields for a model, you need to create a document class that inherits from 
-<code>django_semantic_search.Document</code>. There is no strict requirement for the document class to be put in a specific 
+<p>To define the search fields for a model, you need to create a document class that inherits from
+<code>django_semantic_search.Document</code>. There is no strict requirement for the document class to be put in a specific
 package, but it is recommended to put it in the <code>documents.py</code> file in the app package.</p>
 <p>Assuming, we have a <code>Book</code> model with the <code>title</code>, <code>author</code>, and <code>description</code> fields:</p>
 <div class="language-python highlight"><span class="filename">books/models.py</span><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
@@ -678,7 +696,37 @@ searchable:</p>
 </span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>            <span class="n">VectorIndex</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
 </span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>        <span class="p">]</span>
 </span></code></pre></div>
-<p>Currently, the default embedding model is used for all the fields. </p>
+<p>Currently, the default embedding model is used for all the fields.</p>
+<h3 id="how-to-search-for-documents">How to search for documents?</h3>
+<p>To search for documents, you can use the <code>search</code> method of the document class. The method returns a Django queryset
+with the search results.</p>
+<p>Here is an example of searching for books with the title containing the word "Django":</p>
+<div class="language-python highlight"><span class="filename">books/views.py</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">books.documents</span> <span class="kn">import</span> <span class="n">BookDocument</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">def</span> <span class="nf">search_books</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">query</span> <span class="o">=</span> <span class="s2">&quot;Django&quot;</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">books</span> <span class="o">=</span> <span class="n">BookDocument</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">return</span> <span class="n">render</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s2">&quot;books/search_results.html&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;books&quot;</span><span class="p">:</span> <span class="n">books</span><span class="p">})</span>
+</span></code></pre></div>
+<p>Using the named arguments in the <code>search</code> method allows you to search for documents with specific fields.</p>
+<h3 id="how-to-index-the-existing-data">How to index the existing data?</h3>
+<p>If you are adding the <code>django-semantic-search</code> library to an existing project, you may want to index the existing
+instances of the models. To do this, you can use the <code>index</code> method of the document class.</p>
+<p>Here is an example of indexing all the existing instances of the <code>Book</code> model:</p>
+<div class="language-python highlight"><span class="filename">index_models.py</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span> <span class="nn">books.models</span> <span class="kn">import</span> <span class="n">Book</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span> <span class="nn">books.documents</span> <span class="kn">import</span> <span class="n">BookDocument</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">def</span> <span class="nf">index_books</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">all_books</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="n">BookDocument</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">all_books</span><span class="p">)</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">return</span> <span class="n">HttpResponse</span><span class="p">(</span><span class="s2">&quot;Books indexed successfully.&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Indexing all the instances of the model can be resource-intensive, as each instance of the model has to be converted
+to the vector representation. It is recommended to run the indexing process in a background task or a separate
+management command.</p>
+</div>
 
 
 

@@ -454,9 +454,9 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-create-a-model-class" class="md-nav__link">
+  <a href="#4-create-a-model-class-skip-if-you-already-have-one" class="md-nav__link">
     <span class="md-ellipsis">
-      4. Create a model class
+      4. Create a model class (skip if you already have one)
     </span>
   </a>
   
@@ -645,8 +645,8 @@
 
   <h1>Quickstart</h1>
 
-<p>This quickstart guide will help you to get started with the <code>django-semantic-search</code> library. It will guide you through 
-the installation process, the configuration of the vector search engine and the embedding model, and the definition of 
+<p>This quickstart guide will help you to get started with the <code>django-semantic-search</code> library. It will guide you through
+the installation process, the configuration of the vector search engine and the embedding model, and the definition of
 documents for the selected model.</p>
 <p>Assuming you already have a Django project set up, let's get started.</p>
 <h2 id="1-install-django-semantic-search">1. Install django-semantic-search</h2>
@@ -654,7 +654,7 @@ documents for the selected model.</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-semantic-search
 </span></code></pre></div>
 <p>The default installation does not include any vector search engine or embedding model, so you typically have to install
-the package with the desired support. For example, to install the package with <a href="https://qdrant.tech">Qdrant</a> and 
+the package with the desired support. For example, to install the package with <a href="https://qdrant.tech">Qdrant</a> and
 <a href="https://www.sbert.net">Sentence Transformers</a> support, you can run:</p>
 <div class="language-shell highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pip<span class="w"> </span>install<span class="w"> </span>django-semantic-search<span class="o">[</span>qdrant,sentence-transformers<span class="o">]</span>
 </span></code></pre></div>
@@ -668,7 +668,7 @@ the package with the desired support. For example, to install the package with <
 </span></code></pre></div>
 <h2 id="3-choose-the-vector-search-engine-and-the-embedding-model">3. Choose the vector search engine and the embedding model</h2>
 <p>Do not close the <code>settings.py</code> file yet. You need to configure the vector search engine and the embedding model. Add the
-<code>SEMANTIC_SEARCH</code> dictionary to the <code>settings.py</code> file of the project, with the desired configuration. Here is an 
+<code>SEMANTIC_SEARCH</code> dictionary to the <code>settings.py</code> file of the project, with the desired configuration. Here is an
 example of the configuration:</p>
 <div class="language-python highlight"><span class="filename">settings.py</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">SEMANTIC_SEARCH</span> <span class="o">=</span> <span class="p">{</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="c1"># Vector store is a backend that stores the vectors and provides the search functionality.</span>
@@ -695,13 +695,76 @@ example of the configuration:</p>
 </span></code></pre></div>
 <p>We defined the <code>Qdrant</code> vector search engine and the <code>all-MiniLM-L6-v2</code> embedding model. You can choose other models
 from the <a href="https://www.sbert.net">Sentence Transformers</a> library, for the time being.</p>
-<h2 id="4-create-a-model-class">4. Create a model class</h2>
+<h2 id="4-create-a-model-class-skip-if-you-already-have-one">4. Create a model class (skip if you already have one)</h2>
+<p>Our example will use a simple model class, <code>Book</code>, with the <code>title</code>, <code>author</code>, and <code>description</code> fields. Here is the
+model definition:</p>
+<div class="language-python highlight"><span class="filename">books/models.py</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">author</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">255</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">description</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TextField</span><span class="p">()</span>
+</span></code></pre></div>
+<p>A newly created model means we need to create a migration and apply it to the database:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>python<span class="w"> </span>manage.py<span class="w"> </span>makemigrations
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>python<span class="w"> </span>manage.py<span class="w"> </span>migrate
+</span></code></pre></div>
 <h2 id="5-define-document-class-for-the-selected-model">5. Define document class for the selected model</h2>
-<p>TODO</p>
+<p>Once the model is defined, you need to create a document class that inherits from <code>django_semantic_search.Document</code>.</p>
+<p>Assuming we have a <code>Book</code> model with the <code>title</code>, <code>author</code>, and <code>description</code> fields, here is an example of a document
+class for the <code>Book</code> model, with the <code>title</code> and <code>description</code> fields defined as searchable. Please do not forget to
+use the <code>register_document</code> decorator to register the document class with the library.</p>
+<div class="language-python highlight"><span class="filename">books/documents.py</span><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span> <span class="nn">django_semantic_search</span> <span class="kn">import</span> <span class="n">Document</span><span class="p">,</span> <span class="n">VectorIndex</span><span class="p">,</span> <span class="n">register_document</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span> <span class="nn">books.models</span> <span class="kn">import</span> <span class="n">Book</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nd">@register_document</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="k">class</span> <span class="nc">BookDocument</span><span class="p">(</span><span class="n">Document</span><span class="p">):</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">model</span> <span class="o">=</span> <span class="n">Book</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="n">indexes</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>            <span class="n">VectorIndex</span><span class="p">(</span><span class="s2">&quot;title&quot;</span><span class="p">),</span>
+</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>            <span class="n">VectorIndex</span><span class="p">(</span><span class="s2">&quot;description&quot;</span><span class="p">),</span>
+</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        <span class="p">]</span>
+</span></code></pre></div>
+<p>Currently, only single fields can be used for the vector index.</p>
+<p>The decorator <code>register_document</code> takes care of creating the signals for the model, so all the created/updated/deleted
+instances of the model will be automatically indexed in the vector search engine.</p>
 <h2 id="6-create-and-store-the-instances-of-the-model">6. Create and store the instances of the model</h2>
-<p>TODO</p>
+<p>From now on, whenever you create or update an instance of the <code>Book</code> model, the instance will be automatically indexed
+in the vector search engine. Here is an example of creating a new instance of the <code>Book</code> model:</p>
+<div class="language-python highlight"><span class="filename">books/views.py</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span> <span class="nn">books.models</span> <span class="kn">import</span> <span class="n">Book</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="k">def</span> <span class="nf">create_book</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">book</span> <span class="o">=</span> <span class="n">Book</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="n">title</span><span class="o">=</span><span class="s2">&quot;The Lord of the Rings&quot;</span><span class="p">,</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="n">author</span><span class="o">=</span><span class="s2">&quot;J.R.R. Tolkien&quot;</span><span class="p">,</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="n">description</span><span class="o">=</span><span class="s2">&quot;The Lord of the Rings is an epic high-fantasy novel by the English author and scholar J. R. R. Tolkien.&quot;</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="p">)</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>    <span class="k">return</span> <span class="n">book</span>
+</span></code></pre></div>
+<p>The <code>create_book</code> function creates a new instance of the <code>Book</code> model with the title, author, and description fields
+filled in. The instance is then returned. Under the hood, a corresponding document is created and indexed in the vector
+search engine. It ignores the <code>author</code> field, as it is not defined as a searchable field in the <code>BookDocument</code> class.</p>
 <h2 id="7-search-for-the-instances-of-the-model">7. Search for the instances of the model</h2>
-<p>TODO</p>
+<p>The <code>BookDocument</code> class serves as a bridge between the Django model and the vector search engine. You can use the
+<code>search</code> method to find the most relevant instances of the model. Here is an example of searching for the instances of
+the <code>Book</code> model:</p>
+<div class="language-python highlight"><span class="filename">books/views.py</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">from</span> <span class="nn">books.documents</span> <span class="kn">import</span> <span class="n">BookDocument</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">results</span> <span class="o">=</span> <span class="n">BookDocument</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+</span></code></pre></div>
+<p>We specifically chose the <code>title</code> field to search for the instances of the <code>Book</code> model. The <code>search</code> method returns a
+queryset of the most relevant instances of the model, based on the search query. Alternatively, you can search for the
+instances using the <code>description</code> field:</p>
+<div class="language-python highlight"><span class="filename">books/views.py</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">results</span> <span class="o">=</span> <span class="n">BookDocument</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">query</span><span class="p">)</span>
+</span></code></pre></div>
+<p>Currently, only a single field can be used for the search query, but we plan to extend this functionality in the future.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>This tutorial covers the happy path of using the <code>django-semantic-search</code> library. If you encounter any issues or
+have any questions, feel free to create an issue in the project's repository. Please make sure to check the list of
+<a href="../usage/#frequently-asked-questions">Frequency Asked Questions</a> before creating a new issue.</p>
+</div>
 
 
 
