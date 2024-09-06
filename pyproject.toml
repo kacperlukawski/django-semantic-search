@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-semantic-search"
-version = "0.0.2"
+version = "0.1.0"
 description = "Bringing semantic search to Django. Integrates seamlessly with Django ORM."
 authors = ["Kacper Łukawski <lukawski.kacper@gmail.com>"]
 license = "Apache-2.0"
@@ -10,8 +10,8 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.10"
-django = "^5.1"
+python = ">=3.10"
+django = ">=5.0"
 qdrant-client = "^1.11.1"
 
 [tool.poetry.group.dev.dependencies]

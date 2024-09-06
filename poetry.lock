@@ -2752,5 +2752,5 @@ sentence-transformers = []
 
 [metadata]
 lock-version = "2.0"
-python-versions = "^3.10"
-content-hash = "a0d70dab6355f2d8a62e385b7790402fb524ed397bba701f019ec479a353530a"
+python-versions = ">=3.10"
+content-hash = "d0e277f0bc98e3f2e367ee945562c3a153cd1a6921b9f6cc7b6e12593a4faeca"

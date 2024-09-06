@@ -42,16 +42,11 @@ For the latest documentation, visit [https://kacperlukawski.github.io/django-sem
 
 This is a general roadmap for the project. The list is not exhaustive and may change over time.
 
-[ ] Allow using multiple fields for a single vector index.
-
-[ ] Define overriding the default embedding model for each `VectorIndex`.
-
-[ ] Implement wrappers for embedding models.
-
-[ ] Add support for modalities other than text.
-
-[ ] Improve the test coverage.
-
-[ ] Add metadata filtering to the search method.
+- [ ] Allow using multiple fields for a single vector index.
+- [ ] Define overriding the default embedding model for each `VectorIndex`.
+- [ ] Implement wrappers for embedding models.
+- [ ] Add support for modalities other than text.
+- [ ] Improve the test coverage.
+- [ ] Add metadata filtering to the search method.
 
 If you have any suggestions or feature requests, feel free to create an issue in the project's repository.
