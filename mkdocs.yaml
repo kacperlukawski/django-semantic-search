@@ -1,0 +1,69 @@
+site_name: django-semantic-search
+site_url: https://kacperlukawski.github.io/django-semantic-search/
+site_description: Bringing semantic search to Django. Integrates seamlessly with Django ORM.
+repo_url: https://github.com/kacperlukawski/django-semantic-search
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Usage: usage.md
+  - API Reference:
+      - Documents: api/documents.md
+      - Backends: api/backends.md
+      - Embeddings: api/embeddings.md
+theme:
+  name: material
+  logo: assets/logo.png
+  favicon: assets/favicon.png
+  palette:
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: orange
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: deep orange
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  font:
+    text: Roboto
+    code: Roboto Mono
+  features:
+    - search.suggest
+    - search.highlight
+    - toc.integrate
+    - navigation.tabs
+    - content.code.copy
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            annotations_path: brief
+            show_root_heading: true
+            show_root_toc_entry: true
+            show_symbol_type_heading: true
+            heading_level: 3
+  - social:
+      cards_layout_options:
+        font_family: Roboto
+        logo: assets/logo.png
+        background_color: "#ff6e42"
+        color: "white"
+markdown_extensions:
+  - attr_list
+  - admonition
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences

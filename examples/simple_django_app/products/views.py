@@ -9,8 +9,8 @@ def index(request):
     :return: response object.
     """
     user_query = request.GET.get("query", "hello, world!")
-    name_results = ProductDocument.objects.find(name=user_query)
-    description_results = ProductDocument.objects.find(description=user_query)
+    name_results = ProductDocument.objects.search(name=user_query)
+    description_results = ProductDocument.objects.search(description=user_query)
     return JsonResponse(
         {
             "message": "Hello, world!",

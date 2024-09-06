@@ -1,5 +1,0 @@
-site_name: django-semantic-search
-site_description: Bringing semantic search to Django. Integrates seemlessly with Django ORM.
-repo_url: https://github.com/kacperlukawski/django-semantic-search
-nav:
-  - Home: index.md
