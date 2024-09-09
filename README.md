@@ -26,6 +26,33 @@ pip install django-semantic-search
 
 The current version is still experimental, and the API may change in the future.
 
+## Quickstart
+
+Assuming, you already have a `Book` model defined in your Django application, you can define a corresponding subclass
+of the `Document` class from the `django_semantic_search` package. The `Document` class maps the Django model to the
+vector search engine. The document has to be registered with the `register_document` function.
+
+```python
+from django_semantic_search import Document, VectorIndex, register_document
+from myapp.models import Book
+
+@register_document
+class BookDocument(Document):
+    class Meta:
+        model = Book
+        indexes = [
+            VectorIndex("title"),
+            VectorIndex("description"),
+        ]
+```
+
+The `BookDocument` class defines the fields that will be indexed in the vector search engine. In this case, the `title`
+and `description` fields are indexed as separate vectors. The `VectorIndex` class is used to define the fields that
+should be indexed.
+
+A more detailed guide is available in the [Quickstart](https://kacperlukawski.github.io/django-semantic-search/quickstart/)
+section of the documentation.
+
 ## Usage
 
 Please refer to the [Usage](https://kacperlukawski.github.io/django-semantic-search/usage/) section in the documentation.
