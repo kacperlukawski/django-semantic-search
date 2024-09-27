@@ -18,4 +18,8 @@ quality of the search results and the resource consumption.
 
 ::: django_semantic_search.embeddings.SentenceTransformerModel
     options:
-        members: false
+        members:
+            - __init__
+            - embed_document
+            - embed_query
+            - vector_size

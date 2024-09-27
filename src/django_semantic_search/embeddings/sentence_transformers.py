@@ -33,6 +33,25 @@ class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
         ...
     }
     ```
+
+    Some models accept prompts to be used for the document and query. These prompts are used as additional
+    instructions for the model to generate embeddings. For example, if the `document_prompt` is set to `"Doc: "`, the
+    model will generate embeddings with the prompt `"Doc: "` followed by the document text. Similarly, the
+    `query_prompt` is used for the query, if set.
+
+    ```python title="settings.py"
+    SEMANTIC_SEARCH = {
+        "default_embeddings": {
+            "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+            "configuration": {
+                "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+                "document_prompt": "Doc: ",
+                "query_prompt": "Query: ",
+            },
+        },
+        ...
+    }
+    ```
     """
 
     def __init__(
@@ -42,8 +61,15 @@ class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
         query_prompt: Optional[str] = None,
     ):
         """
-        Initialize the sentence-transformers _model.
+        Initialize the sentence-transformers model.
+
+        Some models accept prompts to be used for the document and query. These prompts are used as additional
+        instructions for the model to generate embeddings. For example, if the `document_prompt` is set to "Doc: ", the
+        model will generate embeddings with the prompt "Doc: " followed by the document text.
+
         :param model_name: name of the model to use.
+        :param document_prompt: prompt to use for the document, defaults to None.
+        :param query_prompt: prompt to use for the query, defaults to None.
         """
         from sentence_transformers import SentenceTransformer
 

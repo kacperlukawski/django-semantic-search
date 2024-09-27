@@ -49,6 +49,7 @@ plugins:
             show_root_toc_entry: true
             show_symbol_type_heading: true
             heading_level: 3
+            docstring_style: sphinx
   - social:
       cards_layout_options:
         font_family: Roboto
