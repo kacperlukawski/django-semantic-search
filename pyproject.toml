@@ -28,9 +28,13 @@ qdrant-client = "^1.11.1"
 [tool.poetry.group.sentence-transformers.dependencies]
 sentence-transformers = "^3.0.1"
 
+[tool.poetry.group.openai.dependencies]
+openai = "^1.0.0"
+
 [tool.poetry.extras]
 qdrant = ["qdrant-client"]
 sentence-transformers = ["sentence-transformers"]
+openai = ["openai"]
 
 [tool.pytest.ini_options]
 minversion = "7.1"
