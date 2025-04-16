@@ -45,10 +45,10 @@ If you would like to contribute support for another vector search engine, feel f
 ### Embedding models
 
 Choosing the right embedding model is crucial for the quality of the search results. The current version of the library
-focuses on bringing the semantic search capabilities to Django, and provides just a single integration with the
-vector embedding models:
+focuses on bringing the semantic search capabilities to Django, and provides integrations with the following vector embedding models:
 
 - [Sentence Transformers](api/embeddings.md#sentence-transformers)
+- [OpenAI](api/embeddings.md#openai)
 
 In web-based applications, it makes a lot of sense to choose an external service for the embedding model, as it can be
 resource-intensive. Please do expect that the library will support more embedding models in the future, and will provide
