@@ -18,6 +18,15 @@ priority = "explicit"
 python = ">=3.10"
 django = ">=5.0"
 qdrant-client = "^1.11.1"
+sentence-transformers = { version = "^3.0.1", optional = true }
+torch = { version = "^2.6.0", source = "pytorch_cpu", optional = true }
+openai = { version = "^1.0.0", optional = true }
+
+[tool.poetry.extras]
+qdrant = ["qdrant-client"]
+sentence-transformers = ["sentence-transformers", "torch"]
+openai = ["openai"]
+all = ["dev", "qdrant-client", "sentence-transformers", "torch", "openai"]
 
 [tool.poetry.group.dev]
 optional = true
@@ -29,28 +38,6 @@ pytest = "^8.3.2"
 mkdocs = "^1.6.1"
 mkdocstrings-python = "^1.11.1"
 mkdocs-material = {extras = ["imaging"], version = "^9.5.34"}
-
-[tool.poetry.group.qdrant.dependencies]
-qdrant-client = "^1.11.1"
-
-[tool.poetry.group.sentence-transformers]
-optional = true
-
-[tool.poetry.group.sentence-transformers.dependencies]
-sentence-transformers = "^3.0.1"
-torch = {version = "^2.6.0", source = "pytorch_cpu"}
-
-[tool.poetry.group.openai]
-optional = true
-
-[tool.poetry.group.openai.dependencies]
-openai = "^1.0.0"
-
-[tool.poetry.extras]
-qdrant = ["qdrant-client"]
-sentence-transformers = ["sentence-transformers"]
-openai = ["openai"]
-all = ["dev", "qdrant-client", "sentence-transformers", "openai"]
 
 [tool.pytest.ini_options]
 minversion = "7.1"
