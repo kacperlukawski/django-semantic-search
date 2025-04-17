@@ -2604,6 +2604,50 @@ opt-einsum = ["opt-einsum (>=3.3)"]
 optree = ["optree (>=0.13.0)"]
 
 [[package]]
+name = "torch"
+version = "2.6.0+cpu"
+description = "Tensors and Dynamic neural networks in Python with strong GPU acceleration"
+optional = true
+python-versions = ">=3.9.0"
+files = [
+    {file = "torch-2.6.0+cpu-cp310-cp310-linux_x86_64.whl", hash = "sha256:35a9e78b7e4096968b54c1a198687b981569c50ae93e661aa430f9fd208da102"},
+    {file = "torch-2.6.0+cpu-cp310-cp310-manylinux_2_28_aarch64.whl", hash = "sha256:90832f4d118c566b8652a2196ac695fc1f14cf420db27b5a1b41c7eaaf2141e9"},
+    {file = "torch-2.6.0+cpu-cp310-cp310-win_amd64.whl", hash = "sha256:6e22f0b13db8d53e55bcb3b46c9dd4b6676d1c44051b56753e745cec3075b333"},
+    {file = "torch-2.6.0+cpu-cp311-cp311-linux_x86_64.whl", hash = "sha256:5b6ae523bfb67088a17ca7734d131548a2e60346c622621e4248ed09dd0790cc"},
+    {file = "torch-2.6.0+cpu-cp311-cp311-manylinux_2_28_aarch64.whl", hash = "sha256:d3dab9fb0294f268aec28e8aaba834e9d006b90a50db5bc2fe2191a9d48c6084"},
+    {file = "torch-2.6.0+cpu-cp311-cp311-win_amd64.whl", hash = "sha256:24c9d3d13b9ea769dd7bd5c11cfa1fc463fd7391397156565484565ca685d908"},
+    {file = "torch-2.6.0+cpu-cp312-cp312-linux_x86_64.whl", hash = "sha256:59e78aa0c690f70734e42670036d6b541930b8eabbaa18d94e090abf14cc4d91"},
+    {file = "torch-2.6.0+cpu-cp312-cp312-manylinux_2_28_aarch64.whl", hash = "sha256:318290e8924353c61b125cdc8768d15208704e279e7757c113b9620740deca98"},
+    {file = "torch-2.6.0+cpu-cp312-cp312-win_amd64.whl", hash = "sha256:4027d982eb2781c93825ab9527f17fbbb12dbabf422298e4b954be60016f87d8"},
+    {file = "torch-2.6.0+cpu-cp313-cp313-linux_x86_64.whl", hash = "sha256:e70ee2e37ad27a90201d101a41c2e10df7cf15a9ebd17c084f54cf2518c57bdf"},
+    {file = "torch-2.6.0+cpu-cp313-cp313-manylinux_2_28_aarch64.whl", hash = "sha256:b5e7e8d561b263b5ad8049736281cd12c78e51e7bc1a913fd4098fd0e0b96347"},
+    {file = "torch-2.6.0+cpu-cp313-cp313-win_amd64.whl", hash = "sha256:b436a6c62d086dc5b32f5721b59f0ca8ad3bf9de09ee9b5b83dbf1e7a7e22c60"},
+    {file = "torch-2.6.0+cpu-cp313-cp313t-linux_x86_64.whl", hash = "sha256:fb34d6cc4e6e20e66d74852c3d84e0301dc5e1a7c822076ef288886f978390f0"},
+    {file = "torch-2.6.0+cpu-cp313-cp313t-manylinux_2_28_aarch64.whl", hash = "sha256:7cac05af909ee1c5c2915e8f3efaa1ea015e7e414be0ff53071402b9e4f3c7df"},
+    {file = "torch-2.6.0+cpu-cp39-cp39-linux_x86_64.whl", hash = "sha256:b68274aeb4047ba8c73e903f0621e2a4adb54ad5282b0845689c3e1dcd2e2546"},
+    {file = "torch-2.6.0+cpu-cp39-cp39-manylinux_2_28_aarch64.whl", hash = "sha256:2ab9c6b3d6eea506bda9b82a0155e974d8ef8e38b417589d144568b4fa59afe1"},
+    {file = "torch-2.6.0+cpu-cp39-cp39-win_amd64.whl", hash = "sha256:e4a85b58ed455915ee66809ca45e0190a76d652d7e6210b72f53a0219459613b"},
+]
+
+[package.dependencies]
+filelock = "*"
+fsspec = "*"
+jinja2 = "*"
+networkx = "*"
+setuptools = {version = "*", markers = "python_version >= \"3.12\""}
+sympy = {version = "1.13.1", markers = "python_version >= \"3.9\""}
+typing-extensions = ">=4.10.0"
+
+[package.extras]
+opt-einsum = ["opt-einsum (>=3.3)"]
+optree = ["optree (>=0.13.0)"]
+
+[package.source]
+type = "legacy"
+url = "https://download.pytorch.org/whl/cpu"
+reference = "pytorch_cpu"
+
+[[package]]
 name = "tqdm"
 version = "4.67.1"
 description = "Fast, Extensible Progress Meter"
@@ -2842,12 +2886,12 @@ files = [
 ]
 
 [extras]
-all = ["openai", "qdrant-client", "sentence-transformers"]
+all = ["openai", "qdrant-client", "sentence-transformers", "torch", "torch"]
 openai = ["openai"]
 qdrant = ["qdrant-client"]
-sentence-transformers = ["sentence-transformers"]
+sentence-transformers = ["sentence-transformers", "torch", "torch"]
 
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10"
-content-hash = "2da4d0410cea2a1ca5ef3cf376c31fb8c6904f1cb076ecc296eb15fc8b507f7b"
+content-hash = "8d79224574f3e90e0ac987c1c865ea5868d17bfeadad0b7a401992ae8cf61a58"
