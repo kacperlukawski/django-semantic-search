@@ -18,13 +18,14 @@ torch = [
   {version = "^2.6.0", markers = "sys_platform == 'darwin'", source = "pypi", optional = true},
   {version = "^2.6.0", markers = "sys_platform != 'darwin'", source = "pytorch_cpu", optional = true}
 ]
+numpy = { version = "<2.0", optional = true }
 openai = { version = "^1.0.0", optional = true }
 
 [tool.poetry.extras]
 qdrant = ["qdrant-client"]
-sentence-transformers = ["sentence-transformers", "torch"]
+sentence-transformers = ["sentence-transformers", "torch", "numpy"]
 openai = ["openai"]
-all = ["dev", "qdrant-client", "sentence-transformers", "torch", "openai"]
+all = ["dev", "qdrant-client", "sentence-transformers", "torch", "numpy", "openai"]
 
 [tool.poetry.group.dev]
 optional = true
