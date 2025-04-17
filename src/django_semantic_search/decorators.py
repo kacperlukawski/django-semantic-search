@@ -1,5 +1,5 @@
 import logging
-from typing import Type
+from typing import Any, Type
 
 from django.core.exceptions import ImproperlyConfigured
 from django.db import models
@@ -25,6 +25,10 @@ def register_document(document_cls: Type[Document]) -> Type[Document]:
 
     # Get the model class from the Meta class of the document
     model_cls = getattr(meta, "model", default_meta.model)
+    if not model_cls:
+        raise ImproperlyConfigured(
+            f"Meta class for {document_cls.__name__} does not have a model attribute."
+        )
 
     # Validate all the indexes for the document
     indexes = getattr(meta, "indexes", default_meta.indexes)
@@ -64,8 +68,12 @@ def register_model_handlers(document_cls: Type[Document]) -> Type[Document]:
         logger.warning(f"Signals are already registered for {document_cls.meta.model}.")
         return document_cls
 
-    @receiver(models.signals.post_save, sender=document_cls.meta.model, weak=False)
-    def save_model(sender, instance: document_cls.meta.model, created: bool, **kwargs):
+    model = document_cls.meta.model
+
+    @receiver(models.signals.post_save, sender=model, weak=False)
+    def save_model(
+        sender: Type[models.Model], instance: models.Model, created: bool, **kwargs: Any
+    ) -> None:
         logger.debug(f"Saving document for {instance}")
         # TODO: detect the changes in the model and determine if the document should be updated
 
@@ -73,8 +81,10 @@ def register_model_handlers(document_cls: Type[Document]) -> Type[Document]:
         document = document_cls(instance)
         document.save()
 
-    @receiver(models.signals.post_delete, sender=document_cls.meta.model, weak=False)
-    def delete_model(sender, instance: document_cls.meta.model, **kwargs):
+    @receiver(models.signals.post_delete, sender=model, weak=False)
+    def delete_model(
+        sender: Type[models.Model], instance: models.Model, **kwargs: Any
+    ) -> None:
         logger.debug(f"Deleting document for {instance}")
         # Create the document instance out of the model instance and delete it
         document = document_cls(instance)

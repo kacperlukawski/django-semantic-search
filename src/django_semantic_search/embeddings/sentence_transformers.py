@@ -1,13 +1,10 @@
 from typing import Optional
 
-from django_semantic_search.embeddings.base import (
-    BaseEmbeddingModel,
-    TextEmbeddingMixin,
-)
-from django_semantic_search.types import Vector
+from django_semantic_search.embeddings.base import DenseTextEmbeddingModel
+from django_semantic_search.types import DenseVector
 
 
-class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
+class SentenceTransformerModel(DenseTextEmbeddingModel):
     """
     Sentence-transformers model for embedding text.
 
@@ -84,7 +81,7 @@ class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
         """
         return self._model.get_sentence_embedding_dimension()
 
-    def embed_document(self, document: str) -> Vector:
+    def embed_document(self, document: str) -> DenseVector:
         """
         Embed a document into a vector.
         :param document: document to embed.
@@ -92,7 +89,7 @@ class SentenceTransformerModel(BaseEmbeddingModel, TextEmbeddingMixin):
         """
         return self._model.encode(document, prompt=self._document_prompt).tolist()
 
-    def embed_query(self, query: str) -> Vector:
+    def embed_query(self, query: str) -> DenseVector:
         """
         Embed a query into a vector.
         :param query: query to embed.

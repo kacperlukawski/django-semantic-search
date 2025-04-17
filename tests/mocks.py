@@ -1,22 +1,19 @@
 import random
 from collections import defaultdict
 from hashlib import md5
-from typing import List
+from typing import Dict, List
 
 from django_semantic_search import Document
 from django_semantic_search.backends.base import BaseVectorSearchBackend
 from django_semantic_search.backends.types import IndexConfiguration
-from django_semantic_search.embeddings.base import (
-    BaseEmbeddingModel,
-    TextEmbeddingMixin,
-)
-from django_semantic_search.types import DocumentID, Vector
+from django_semantic_search.embeddings.base import DenseTextEmbeddingModel
+from django_semantic_search.types import DenseVector, DocumentID, Vector
 
 
-class MockTextEmbeddingModel(BaseEmbeddingModel, TextEmbeddingMixin):
+class MockDenseTextEmbeddingModel(DenseTextEmbeddingModel):
     """
-    Mock text embedding model for testing purposes. It produces short random vectors, but these vectors are consistent
-    for the same input. So it can be used for testing purposes.
+    Mock dense text embedding model for testing purposes. It produces short random vectors,
+    but these vectors are consistent for the same input. So it can be used for testing purposes.
     """
 
     def __init__(self, size: int = 10):
@@ -25,13 +22,13 @@ class MockTextEmbeddingModel(BaseEmbeddingModel, TextEmbeddingMixin):
     def vector_size(self) -> int:
         return self._size
 
-    def embed_document(self, document: str) -> Vector:
+    def embed_document(self, document: str) -> DenseVector:
         """Return a random vector."""
         document_hash = md5(document.encode()).hexdigest()
         random.seed(document_hash)
         return [random.random() for _ in range(self._size)]
 
-    def embed_query(self, query: str) -> Vector:
+    def embed_query(self, query: str) -> DenseVector:
         return self.embed_document(query)
 
 
@@ -43,7 +40,7 @@ class MockVectorSearchBackend(BaseVectorSearchBackend):
 
     def __init__(self, index_configuration: IndexConfiguration):
         super().__init__(index_configuration)
-        self._documents = defaultdict(dict)
+        self._documents: Dict[str, Dict[DocumentID, Document]] = defaultdict(dict)
 
     def configure(self):
         """No configuration is needed for the mock backend."""
