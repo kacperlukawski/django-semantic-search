@@ -2643,6 +2643,7 @@ files = [
 ]
 
 [extras]
+all = ["qdrant-client"]
 openai = []
 qdrant = ["qdrant-client"]
 sentence-transformers = []
@@ -2650,4 +2651,4 @@ sentence-transformers = []
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10"
-content-hash = "92e1e549693f199a56b9f9e598ddbf0481211c079f47c43fd8047b659acfb0c1"
+content-hash = "82240661d6326e69a00a0223560263dad15e4ecd429028c5050a2a4a3a7831d0"

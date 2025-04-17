@@ -19,6 +19,9 @@ python = ">=3.10"
 django = ">=5.0"
 qdrant-client = "^1.11.1"
 
+[tool.poetry.group.dev]
+optional = true
+
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
 ruff = "^0.6.2"
@@ -47,6 +50,7 @@ openai = "^1.0.0"
 qdrant = ["qdrant-client"]
 sentence-transformers = ["sentence-transformers"]
 openai = ["openai"]
+all = ["dev", "qdrant-client", "sentence-transformers", "openai"]
 
 [tool.pytest.ini_options]
 minversion = "7.1"
