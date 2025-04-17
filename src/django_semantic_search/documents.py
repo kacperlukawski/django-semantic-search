@@ -113,10 +113,10 @@ class MetaManager:
     A descriptor to store an instance of the Meta class instance on the document class.
     """
 
-    def __get__(self, instance: "Document", owner: Type["Document"]):
+    def __get__(self, instance: Optional["Document"], owner: Type["Document"]):
         if not hasattr(owner, "_meta"):
-            owner._meta = owner.Meta()
-        return owner._meta
+            setattr(owner, "_meta", owner.Meta())
+        return getattr(owner, "_meta")
 
 
 class IndexConfigurationManager:
@@ -126,7 +126,7 @@ class IndexConfigurationManager:
     """
 
     def __get__(
-        self, instance: "Document", owner: Type["Document"]
+        self, instance: Optional["Document"], owner: Type["Document"]
     ) -> IndexConfiguration:
         if not hasattr(owner, "_index_configuration"):
             attr_meta = owner.meta
@@ -134,7 +134,7 @@ class IndexConfigurationManager:
             model_name = model.__name__ if model else None
             index_namespace = getattr(attr_meta, "namespace", model_name)
             indexes = getattr(attr_meta, "indexes", [])
-            owner._index_configuration = IndexConfiguration(
+            config = IndexConfiguration(
                 namespace=index_namespace,
                 vectors={
                     index.index_name: VectorConfiguration(
@@ -144,7 +144,8 @@ class IndexConfigurationManager:
                     for index in indexes
                 },
             )
-        return owner._index_configuration
+            setattr(owner, "_index_configuration", config)
+        return getattr(owner, "_index_configuration")
 
 
 class BackendManager:
@@ -153,12 +154,12 @@ class BackendManager:
     configuration and is loaded dynamically.
     """
 
-    def __get__(self, instance: "Document", owner: Type["Document"]):
+    def __get__(self, instance: Optional["Document"], owner: Type["Document"]):
         if not hasattr(owner, "_backend"):
             from django_semantic_search.utils import load_backend
 
-            owner._backend = load_backend(owner.index_configuration)
-        return owner._backend
+            setattr(owner, "_backend", load_backend(owner.index_configuration))
+        return getattr(owner, "_backend")
 
 
 class DocumentManager(Generic[T]):
@@ -225,8 +226,8 @@ class DocumentManagerDescriptor(Generic[T]):
 
     def __get__(self, instance, owner):
         if not hasattr(owner, "_document_manager"):
-            owner._document_manager = DocumentManager[T](owner)
-        return owner._document_manager
+            setattr(owner, "_document_manager", DocumentManager[T](owner))
+        return getattr(owner, "_document_manager")
 
 
 class Document(abc.ABC, Generic[T]):
@@ -291,7 +292,7 @@ class Document(abc.ABC, Generic[T]):
     meta = MetaManager()
     index_configuration = IndexConfigurationManager()
     backend = BackendManager()
-    objects: DocumentManager = DocumentManagerDescriptor[T]()
+    objects = DocumentManagerDescriptor[T]()
 
     def __init__(self, instance: T):
         self._instance = instance
@@ -344,7 +345,7 @@ class Document(abc.ABC, Generic[T]):
 
     class Meta:
         # The model this document is associated with
-        model: Type[models.Model] = None
+        model: Optional[Type[models.Model]] = None
         # Namespace for the documents in the vector store, defaults to the model name
         namespace: Optional[str] = None
         # List of vector indexes created out of the model fields

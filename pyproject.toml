@@ -13,6 +13,21 @@ packages = [
 python = ">=3.10"
 django = ">=5.0"
 qdrant-client = "^1.11.1"
+sentence-transformers = { version = "^4.1.0", optional = true }
+torch = [
+  {version = "^2.6.0", markers = "sys_platform == 'darwin'", source = "pypi", optional = true},
+  {version = "^2.6.0", markers = "sys_platform != 'darwin'", source = "pytorch_cpu", optional = true}
+]
+openai = { version = "^1.0.0", optional = true }
+
+[tool.poetry.extras]
+qdrant = ["qdrant-client"]
+sentence-transformers = ["sentence-transformers", "torch"]
+openai = ["openai"]
+all = ["qdrant-client", "sentence-transformers", "torch", "openai"]
+
+[tool.poetry.group.dev]
+optional = true
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^3.8.0"
@@ -22,19 +37,10 @@ mkdocs = "^1.6.1"
 mkdocstrings-python = "^1.11.1"
 mkdocs-material = {extras = ["imaging"], version = "^9.5.34"}
 
-[tool.poetry.group.qdrant.dependencies]
-qdrant-client = "^1.11.1"
-
-[tool.poetry.group.sentence-transformers.dependencies]
-sentence-transformers = "^3.0.1"
-
-[tool.poetry.group.openai.dependencies]
-openai = "^1.0.0"
-
-[tool.poetry.extras]
-qdrant = ["qdrant-client"]
-sentence-transformers = ["sentence-transformers"]
-openai = ["openai"]
+[[tool.poetry.source]]
+name = "pytorch_cpu"
+url = "https://download.pytorch.org/whl/cpu"
+priority = "explicit"
 
 [tool.pytest.ini_options]
 minversion = "7.1"

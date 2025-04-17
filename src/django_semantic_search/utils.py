@@ -4,13 +4,13 @@ from django.conf import settings
 from django.utils.module_loading import import_string
 
 from django_semantic_search.backends.types import IndexConfiguration
-from django_semantic_search.embeddings.base import BaseEmbeddingModel
+from django_semantic_search.embeddings.base import DenseTextEmbeddingModel
 
 
 @cache
-def load_embedding_model() -> BaseEmbeddingModel:
+def load_embedding_model() -> DenseTextEmbeddingModel:
     """
-    Load the default embedding model, as specified in the settings.
+    Load the default dense embedding model, as specified in the settings.
     :return: default embedding model instance.
     """
     semantic_search_settings = settings.SEMANTIC_SEARCH

@@ -20,7 +20,6 @@ jobs:
         os:
           - ubuntu-22.04
           - windows-latest
-          - macos-latest
 
     runs-on: ${{ matrix.os }}
 
@@ -43,7 +42,7 @@ jobs:
           virtualenvs-in-project: true
 
       - name: Install dependencies
-        run: poetry install --no-interaction --no-root --with dev
+        run: poetry install --no-interaction --extras all --with dev
 
       - name: Run tests
         run: |

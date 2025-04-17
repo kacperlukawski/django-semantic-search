@@ -1,5 +1,5 @@
 import django
-from mocks import MockTextEmbeddingModel, MockVectorSearchBackend
+from mocks import MockDenseTextEmbeddingModel, MockVectorSearchBackend
 
 
 def pytest_configure(config):
@@ -19,7 +19,7 @@ def pytest_configure(config):
                 "configuration": {},
             },
             "default_embeddings": {
-                "model": MockTextEmbeddingModel,
+                "model": MockDenseTextEmbeddingModel,
                 "configuration": {},
             },
         },

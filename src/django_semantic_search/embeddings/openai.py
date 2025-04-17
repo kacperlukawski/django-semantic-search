@@ -3,16 +3,13 @@ from typing import Optional
 
 from openai import OpenAI
 
-from django_semantic_search.embeddings.base import (
-    BaseEmbeddingModel,
-    TextEmbeddingMixin,
-)
-from django_semantic_search.types import Vector
+from django_semantic_search.embeddings.base import DenseTextEmbeddingModel
+from django_semantic_search.types import DenseVector
 
 
-class OpenAIEmbeddingModel(BaseEmbeddingModel, TextEmbeddingMixin):
+class OpenAIEmbeddingModel(DenseTextEmbeddingModel):
     """
-    OpenAI text embedding model that uses the OpenAI API to generate embeddings.
+    OpenAI text embedding model that uses the OpenAI API to generate dense embeddings.
 
     **Requirements**:
 
@@ -57,7 +54,7 @@ class OpenAIEmbeddingModel(BaseEmbeddingModel, TextEmbeddingMixin):
             )
         self._client = OpenAI(api_key=api_key, **kwargs)
         # Cache the vector size after first call
-        self._vector_size = None
+        self._vector_size: Optional[int] = None
 
     def vector_size(self) -> int:
         if self._vector_size is None:
@@ -68,12 +65,13 @@ class OpenAIEmbeddingModel(BaseEmbeddingModel, TextEmbeddingMixin):
             self._vector_size = len(response.data[0].embedding)
         return self._vector_size
 
-    def embed_document(self, document: str) -> Vector:
+    def embed_document(self, document: str) -> DenseVector:
+        processed_text = self.preprocess_text(document)
         response = self._client.embeddings.create(
             model=self._model,
-            input=document,
+            input=processed_text,
         )
         return response.data[0].embedding
 
-    def embed_query(self, query: str) -> Vector:
+    def embed_query(self, query: str) -> DenseVector:
         return self.embed_document(query)
