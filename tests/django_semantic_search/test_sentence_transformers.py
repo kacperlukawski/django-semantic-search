@@ -9,6 +9,10 @@ from django_semantic_search.embeddings.sentence_transformers import (
 class TestSentenceTransformerModel:
     @pytest.fixture(autouse=True)
     def setup_model(self):
+        import torch
+
+        torch.set_num_threads(1)
+
         self.model = SentenceTransformerModel(
             model_name="sentence-transformers/all-MiniLM-L6-v2"
         )
