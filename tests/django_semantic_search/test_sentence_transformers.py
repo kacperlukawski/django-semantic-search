@@ -1,9 +1,4 @@
 import pytest
-import torch
-
-# The number of threads to use for PyTorch operations is set to 1
-# to avoid issues with pytest on macOS.
-torch.set_num_threads(1)  # noqa
 
 from django_semantic_search.embeddings.sentence_transformers import (  # noqa
     SentenceTransformerModel,

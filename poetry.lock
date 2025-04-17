@@ -2897,4 +2897,4 @@ sentence-transformers = ["numpy", "sentence-transformers", "torch", "torch"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10"
-content-hash = "dcdaaea088fe1a5aed103b6af2490096147a0169721f1f1e7bfebeb68f961905"
+content-hash = "fa4ac8c82346ddc29438d981cc78e352083e2478b78492204a613c826fcbada5"
