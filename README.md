@@ -62,6 +62,10 @@ Please refer to the [Usage](https://kacperlukawski.github.io/django-semantic-sea
 - Define the search fields for a model.
 - Reflect the configuration in your vector search engine.
 - Auto-populate the vector search engine with the data from the Django models.
+- Support for multiple embedding models:
+  - Sentence Transformers
+  - OpenAI
+  - FastEmbed (both dense and sparse embeddings)
 
 For the latest documentation, visit [https://kacperlukawski.github.io/django-semantic-search/](https://kacperlukawski.github.io/django-semantic-search/).
 

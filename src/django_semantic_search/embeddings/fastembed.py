@@ -97,19 +97,7 @@ class FastEmbedSparseModel(SparseTextEmbeddingModel):
     pip install django-semantic-search[fastembed]
     ```
 
-    **Usage:**
-
-    ```python title="settings.py"
-    SEMANTIC_SEARCH = {
-        "default_embeddings": {
-            "model": "django_semantic_search.embeddings.FastEmbedSparseModel",
-            "configuration": {
-                "model_name": "Qdrant/bm25",
-            },
-        },
-        ...
-    }
-    ```
+    **Important:** For now, there is no way to use the model in django-semantic-search, but it's on the way.
     """
 
     def __init__(
