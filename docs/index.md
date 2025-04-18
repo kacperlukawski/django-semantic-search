@@ -49,6 +49,7 @@ focuses on bringing the semantic search capabilities to Django, and provides int
 
 - [Sentence Transformers](api/embeddings.md#sentence-transformers)
 - [OpenAI](api/embeddings.md#openai)
+- [FastEmbed](api/embeddings.md#fastembed) (currently supports dense embeddings, sparse embeddings coming soon)
 
 In web-based applications, it makes a lot of sense to choose an external service for the embedding model, as it can be
 resource-intensive. Please do expect that the library will support more embedding models in the future, and will provide
