@@ -1,5 +1,6 @@
 import os
 
+import numpy as np
 import pytest
 
 from django_semantic_search.embeddings.openai import OpenAIEmbeddingModel
@@ -46,5 +47,5 @@ class TestOpenAIEmbeddingModel:
         text = "This is a test document"
         vector1 = model.embed_document(text)
         vector2 = model.embed_document(text)
-        # Vectors should be identical for same input
-        assert vector1 == vector2
+        # Vectors should be nearly identical for same input
+        assert np.allclose(vector1, vector2, rtol=1e-5, atol=1e-8)

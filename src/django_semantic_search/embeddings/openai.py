@@ -66,10 +66,9 @@ class OpenAIEmbeddingModel(DenseTextEmbeddingModel):
         return self._vector_size
 
     def embed_document(self, document: str) -> DenseVector:
-        processed_text = self.preprocess_text(document)
         response = self._client.embeddings.create(
             model=self._model,
-            input=processed_text,
+            input=document,
         )
         return response.data[0].embedding
 
