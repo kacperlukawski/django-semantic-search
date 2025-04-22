@@ -60,10 +60,6 @@ class TextEmbeddingMixin:
     def supports_document(self, document: DocumentContent) -> bool:
         return isinstance(document, str)
 
-    def preprocess_text(self, text: str) -> str:
-        """Common text preprocessing logic."""
-        return text.strip()
-
 
 class DenseTextEmbeddingModel(TextEmbeddingMixin, DenseEmbeddingModel, abc.ABC):
     """Base class for dense text embedding models."""

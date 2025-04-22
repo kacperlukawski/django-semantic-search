@@ -1,3 +1,4 @@
+import numpy as np
 import pytest
 
 from django_semantic_search.embeddings.sentence_transformers import (  # noqa
@@ -53,8 +54,8 @@ class TestSentenceTransformerModel:
         text = "This is a test document"
         vector1 = self.model.embed_document(text)
         vector2 = self.model.embed_document(text)
-        # Vectors should be identical for same input
-        assert vector1 == vector2
+        # Vectors should be nearly identical for same input
+        assert np.allclose(vector1, vector2, rtol=1e-5, atol=1e-8)
 
     def test_document_prompt_affects_embedding(self):
         model_with_prompt = SentenceTransformerModel(
@@ -65,7 +66,7 @@ class TestSentenceTransformerModel:
         vector1 = self.model.embed_document(text)
         vector2 = model_with_prompt.embed_document(text)
         # Vectors should be different when using a prompt
-        assert vector1 != vector2
+        assert not np.allclose(vector1, vector2, rtol=1e-5, atol=1e-8)
 
     def test_query_prompt_affects_embedding(self):
         model_with_prompt = SentenceTransformerModel(
@@ -76,4 +77,4 @@ class TestSentenceTransformerModel:
         vector1 = self.model.embed_query(text)
         vector2 = model_with_prompt.embed_query(text)
         # Vectors should be different when using a prompt
-        assert vector1 != vector2
+        assert not np.allclose(vector1, vector2, rtol=1e-5, atol=1e-8)

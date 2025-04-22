@@ -15,16 +15,18 @@ django = ">=5.0"
 qdrant-client = "^1.11.1"
 sentence-transformers = { version = "^4.1.0", optional = true }
 torch = [
-  {version = "^2.6.0", markers = "sys_platform == 'darwin'", source = "pypi", optional = true},
-  {version = "^2.6.0", markers = "sys_platform != 'darwin'", source = "pytorch_cpu", optional = true}
+  {version = "^2.0.0", markers = "sys_platform == 'darwin'", source = "pypi", optional = true},
+  {version = "^2.0.0", markers = "sys_platform != 'darwin'", source = "pytorch_cpu", optional = true}
 ]
 openai = { version = "^1.0.0", optional = true }
+fastembed = { version = "^0.6.1", optional = true }
 
 [tool.poetry.extras]
 qdrant = ["qdrant-client"]
 sentence-transformers = ["sentence-transformers", "torch"]
 openai = ["openai"]
-all = ["qdrant-client", "sentence-transformers", "torch", "openai"]
+fastembed = ["fastembed"]
+all = ["qdrant-client", "sentence-transformers", "torch", "openai", "fastembed"]
 
 [tool.poetry.group.dev]
 optional = true
