@@ -39,15 +39,26 @@ INSTALLED_APPS = [
 ## 3. Choose the vector search engine and the embedding model
 
 Do not close the `settings.py` file yet. You need to configure the vector search engine and the embedding model. Add the
-`SEMANTIC_SEARCH` dictionary to the `settings.py` file of the project, with the desired configuration. Here is an
-example of the configuration:
+`SEMANTIC_SEARCH` dictionary to the `settings.py` file of the project. Here is a basic example:
 
 ```python title="settings.py"
---8<-- "src/django_semantic_search/default_settings.py"
+SEMANTIC_SEARCH = {
+    "vector_store": {
+        "backend": "django_semantic_search.backends.qdrant.QdrantBackend",
+        "configuration": {
+            "location": "http://localhost:6333",
+        },
+    },
+    "default_embeddings": {
+        "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+        "configuration": {
+            "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+        },
+    },
+}
 ```
 
-We defined the `Qdrant` vector search engine and the `all-MiniLM-L6-v2` embedding model. You can choose other models
-from the [Sentence Transformers](https://www.sbert.net) library, for the time being.
+For more advanced configurations, including using different embedding models for different fields, see the [Embedding Models](api/embeddings.md) documentation.
 
 ## 4. Create a model class (skip if you already have one)
 

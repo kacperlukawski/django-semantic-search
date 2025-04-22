@@ -23,17 +23,18 @@ class VectorIndex:
     but also allows to surpass the default settings of django-semantic-search.
     """
 
-    # TODO: allow specifying the embedding model for the index
-
     def __init__(
         self,
         *fields: str,
         index_name: Optional[str] = None,
         distance: Distance = Distance.COSINE,
+        embedding_model: Optional[str] = None,
     ):
         """
         :param fields: model fields to index together.
         :param index_name: name of the index to use in a backend. By default, it is the concatenation of the fields.
+        :param distance: distance metric to use for similarity search.
+        :param embedding_model: name of the embedding model to use, must be defined in SEMANTIC_SEARCH settings.
         """
         # Loading the default embedding model here, as otherwise it would create a circular import
         from django_semantic_search.utils import load_embedding_model
@@ -44,7 +45,7 @@ class VectorIndex:
         self._fields: List[str] = list(fields)
         self._index_name = index_name or "_".join(fields)
         self._distance = distance
-        self._embedding_model = load_embedding_model()
+        self._embedding_model = load_embedding_model(embedding_model)
 
     def validate(self, model_cls: Type[models.Model]):
         """

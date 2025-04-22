@@ -3,10 +3,72 @@ title: Embedding models
 ---
 
 An embedding model is a tool that converts text data into a vector representation. The quality of the embedding model
-is crucial for the quality of the search results. Currently, `django-semantic-search` supports the following integrations
-with vector embedding models:
+is crucial for the quality of the search results. You can configure multiple embedding models in your Django settings
+and use them for different fields in your documents.
 
-## Sentence Transformers
+## Configuration
+
+### Default Embedding Model
+
+Configure the default embedding model that will be used when no specific model is specified:
+
+```python title="settings.py"
+SEMANTIC_SEARCH = {
+    "default_embeddings": {
+        "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+        "configuration": {
+            "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+        },
+    },
+}
+```
+
+### Named Embedding Models
+
+You can define multiple named embedding models to use for different fields:
+
+```python title="settings.py"
+SEMANTIC_SEARCH = {
+    "embedding_models": {
+        "title_model": {
+            "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+            "configuration": {
+                "model_name": "sentence-transformers/all-mpnet-base-v2",
+                "document_prompt": "Title: ",
+            },
+        },
+        "content_model": {
+            "model": "django_semantic_search.embeddings.OpenAIEmbeddingModel",
+            "configuration": {
+                "model": "text-embedding-3-small",
+            },
+        },
+    },
+    ...
+}
+```
+
+Then reference these models in your document definitions:
+
+```python title="documents.py"
+@register_document
+class BookDocument(Document):
+    class Meta:
+        model = Book
+        indexes = [
+            VectorIndex("title", embedding_model="title_model"),
+            VectorIndex("content", embedding_model="content_model"),
+            VectorIndex("summary"),  # Will use default_embeddings
+        ]
+```
+
+Note: Fields without a specified `embedding_model` will use the model defined in `default_embeddings`.
+
+## Supported Models
+
+Currently, `django-semantic-search` supports the following embedding models:
+
+### Sentence Transformers
 
 The [Sentence Transformers](https://www.sbert.net) library provides a way to convert text data into a vector
 representation. There are [over 5,000 pre-trained models
@@ -24,7 +86,7 @@ quality of the search results and the resource consumption.
             - embed_query
             - vector_size
 
-## OpenAI
+### OpenAI
 
 [OpenAI](https://platform.openai.com/docs/guides/embeddings) provides powerful embedding models through their API. The default model is `text-embedding-3-small`, which
 offers a good balance between quality and cost.
@@ -60,12 +122,12 @@ The API key can also be provided through the `OPENAI_API_KEY` environment variab
             - embed_query
             - vector_size
 
-## FastEmbed
+### FastEmbed
 
 [FastEmbed](https://github.com/qdrant/fastembed) is a lightweight and efficient embedding library that supports both
 dense and sparse embeddings. It provides fast, accurate embeddings suitable for production use.
 
-### Installation
+#### Installation
 
 To use FastEmbed embeddings, install the required dependencies:
 
@@ -73,7 +135,7 @@ To use FastEmbed embeddings, install the required dependencies:
 pip install django-semantic-search[fastembed]
 ```
 
-### Dense Embeddings
+#### Dense Embeddings
 
 For dense embeddings, configure FastEmbed in your Django settings:
 
@@ -97,7 +159,7 @@ SEMANTIC_SEARCH = {
             - embed_query
             - vector_size
 
-### Sparse Embeddings (Coming Soon)
+#### Sparse Embeddings (Coming Soon)
 
 > **Note:** Sparse embeddings support is currently under development and not yet available for use in
 > django-semantic-search. This feature will be available in a future release.
