@@ -18,12 +18,58 @@ INSTALLED_APPS = [
 ]
 ```
 
-All the library configuration is also done in the `settings.py` file of the project, via the `SEMANTIC_SEARCH`
+All the library configuration is done in the `settings.py` file of the project, via the `SEMANTIC_SEARCH`
 dictionary. Here is a full example of the configuration:
 
 ```python title="settings.py"
 --8<-- "src/django_semantic_search/default_settings.py"
 ```
+
+### Using Different Embedding Models
+
+You can define multiple embedding models in the settings and use them for different fields in your documents:
+
+```python title="settings.py"
+SEMANTIC_SEARCH = {
+    "default_embeddings": {
+        "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+        "configuration": {
+            "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+        },
+    },
+    "embedding_models": {
+        "title_model": {
+            "model": "django_semantic_search.embeddings.SentenceTransformerModel",
+            "configuration": {
+                "model_name": "sentence-transformers/all-mpnet-base-v2",
+                "document_prompt": "Title: ",
+            },
+        },
+        "content_model": {
+            "model": "django_semantic_search.embeddings.OpenAIEmbeddingModel",
+            "configuration": {
+                "model": "text-embedding-3-small",
+            },
+        },
+    }
+}
+```
+
+Then reference these models in your document definitions:
+
+```python title="books/documents.py"
+@register_document
+class BookDocument(Document):
+    class Meta:
+        model = Book
+        indexes = [
+            VectorIndex("title", embedding_model="title_model"),  # Uses title_model
+            VectorIndex("content", embedding_model="content_model"),  # Uses content_model
+            VectorIndex("description"),  # Uses default_embeddings
+        ]
+```
+
+If no specific embedding model is specified for a `VectorIndex`, it will use the model defined in `default_embeddings`.
 
 ## Frequently Asked Questions
 

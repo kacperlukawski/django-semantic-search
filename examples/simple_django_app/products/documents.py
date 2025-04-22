@@ -1,10 +1,9 @@
 import django_semantic_search as dss
-from django_semantic_search import register_document
 
 from .models import Product
 
 
-@register_document
+@dss.register_document
 class ProductDocument(dss.Document):
     """
     Maps the Product model to a document for the semantic search engine.
