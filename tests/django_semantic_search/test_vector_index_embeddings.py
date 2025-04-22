@@ -20,7 +20,7 @@ class TestVectorIndexEmbeddings:
         settings.SEMANTIC_SEARCH = {
             "vector_store": {
                 "backend": "django_semantic_search.backends.qdrant.QdrantBackend",
-                "configuration": {"location": "http://localhost:6333"},
+                "configuration": {"location": ":memory:"},
             },
             "default_embeddings": {
                 "model": "django_semantic_search.embeddings.SentenceTransformerModel",
