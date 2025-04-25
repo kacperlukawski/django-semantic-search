@@ -1,5 +1,5 @@
 import django
-from mocks import MockDenseTextEmbeddingModel, MockVectorSearchBackend
+from mocks import test_settings
 
 
 def pytest_configure(config):
@@ -13,16 +13,7 @@ def pytest_configure(config):
                 "AUTOCOMMIT": True,
             }
         },
-        SEMANTIC_SEARCH={
-            "vector_store": {
-                "backend": MockVectorSearchBackend,
-                "configuration": {},
-            },
-            "default_embeddings": {
-                "model": MockDenseTextEmbeddingModel,
-                "configuration": {},
-            },
-        },
+        SEMANTIC_SEARCH=test_settings,
     )
 
     django.setup()

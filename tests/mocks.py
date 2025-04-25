@@ -64,3 +64,16 @@ class MockVectorSearchBackend(BaseVectorSearchBackend):
 
     def delete(self, document_id: DocumentID) -> None:
         del self._documents[self.index_configuration.namespace][document_id]
+
+
+# Configuration for the tests
+test_settings = {
+    "vector_store": {
+        "backend": MockVectorSearchBackend,
+        "configuration": {},
+    },
+    "default_embeddings": {
+        "model": MockDenseTextEmbeddingModel,
+        "configuration": {},
+    },
+}

@@ -10,7 +10,6 @@ class DjangoSemanticSearchConfig(AppConfig):
 
     def ready(self):
         # Load the default settings
-        # TODO: verify whether the settings are already loaded, and not overwrite them
         for setting in dir(default_settings):
-            if setting.isupper():
+            if setting.isupper() and not hasattr(settings, setting):
                 setattr(settings, setting, getattr(default_settings, setting))
