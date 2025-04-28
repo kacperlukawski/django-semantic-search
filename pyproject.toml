@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "django-semantic-search"
-version = "0.2.0"
+version = "0.2.1"
 description = "Bringing semantic search to Django. Integrates seamlessly with Django ORM."
 authors = ["Kacper Łukawski <lukawski.kacper@gmail.com>"]
 license = "Apache-2.0"
