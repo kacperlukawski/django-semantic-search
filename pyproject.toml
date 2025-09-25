@@ -1,48 +1,58 @@
-[tool.poetry]
+[project]
 name = "django-semantic-search"
 version = "0.2.1"
 description = "Bringing semantic search to Django. Integrates seamlessly with Django ORM."
-authors = ["Kacper Łukawski <lukawski.kacper@gmail.com>"]
-license = "Apache-2.0"
+authors = [{ name = "Kacper Łukawski", email = "lukawski.kacper@gmail.com" }]
+requires-python = ">=3.10"
 readme = "README.md"
-packages = [
-    { include = "django_semantic_search", from = "src" },
+license = "Apache-2.0"
+dependencies = ["django>=5.0"]
+
+[project.optional-dependencies]
+qdrant = ["qdrant-client>=1.11.1,<2"]
+sentence-transformers = [
+    "sentence-transformers>=4.1.0,<5",
+    "torch",
+]
+openai = ["openai>=1.0.0,<2"]
+fastembed = ["fastembed>=0.6.1,<0.7"]
+all = [
+    "qdrant-client>=1.11.1,<2",
+    "sentence-transformers>=4.1.0,<5",
+    "torch",
+    "openai>=1.0.0,<2",
+    "fastembed>=0.6.1,<0.7",
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.10"
-django = ">=5.0"
-qdrant-client = "^1.11.1"
-sentence-transformers = { version = "^4.1.0", optional = true }
-torch = [
-  {version = "^2.0.0", markers = "sys_platform == 'darwin'", source = "pypi", optional = true},
-  {version = "^2.0.0", markers = "sys_platform != 'darwin'", source = "pytorch_cpu", optional = true}
+[dependency-groups]
+dev = [
+    "pre-commit>=3.8.0,<4",
+    "ruff>=0.6.2,<0.7",
+    "pytest>=8.3.2,<9",
+    "mkdocs>=1.6.1,<2",
+    "mkdocstrings-python>=1.11.1,<2",
+    "mkdocs-material[imaging]>=9.5.34,<10",
 ]
-openai = { version = "^1.0.0", optional = true }
-fastembed = { version = "^0.6.1", optional = true }
 
-[tool.poetry.extras]
-qdrant = ["qdrant-client"]
-sentence-transformers = ["sentence-transformers", "torch"]
-openai = ["openai"]
-fastembed = ["fastembed"]
-all = ["qdrant-client", "sentence-transformers", "torch", "openai", "fastembed"]
+[tool.uv]
 
-[tool.poetry.group.dev]
-optional = true
-
-[tool.poetry.group.dev.dependencies]
-pre-commit = "^3.8.0"
-ruff = "^0.6.2"
-pytest = "^8.3.2"
-mkdocs = "^1.6.1"
-mkdocstrings-python = "^1.11.1"
-mkdocs-material = {extras = ["imaging"], version = "^9.5.34"}
-
-[[tool.poetry.source]]
+[[tool.uv.index]]
 name = "pytorch_cpu"
 url = "https://download.pytorch.org/whl/cpu"
-priority = "explicit"
+explicit = true
+
+[tool.hatch.build.targets.sdist]
+include = ["src/django_semantic_search"]
+
+[tool.hatch.build.targets.wheel]
+include = ["src/django_semantic_search"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src/django_semantic_search" = "django_semantic_search"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [tool.pytest.ini_options]
 minversion = "7.1"
@@ -55,7 +65,3 @@ testpaths = [
 
 [tool.ruff]
 lint.typing-modules = ["cibuildwheel.typing"]
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
