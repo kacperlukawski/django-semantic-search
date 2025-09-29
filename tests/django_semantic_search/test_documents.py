@@ -151,3 +151,49 @@ def test_model_has_more_entries_than_vector_backend():
         assert JustAnotherDocument.objects.search(name="a").count() == 3
 
         schema_editor.delete_model(JustAnotherModel)
+
+
+class DocModel(models.Model):
+    name = models.CharField(max_length=255)
+
+    class Meta:
+        app_label = "test_documents_additional"
+
+
+def test_vector_index_validate_raises_on_missing_field():
+    index = dss.VectorIndex("not_a_field")
+    with pytest.raises(ValueError) as exc:
+        index.validate(DocModel)
+    assert "not_a_field" in str(exc.value)
+
+
+@dss.register_document
+class Doc(dss.Document):
+    class Meta:
+        model = DocModel
+        indexes = [dss.VectorIndex("name")]
+
+
+def test_document_save_raises_if_instance_unsaved():
+    instance = DocModel(name="x")
+    doc = Doc(instance)
+    with pytest.raises(ValueError):
+        doc.save()
+
+
+def test_document_id_raises_if_instance_unsaved():
+    instance = DocModel(name="x")
+    doc = Doc(instance)
+    with pytest.raises(ValueError):
+        _ = doc.id
+
+
+def test_document_manager_search_validates_single_kwarg(monkeypatch):
+    with pytest.raises(ValueError):
+        Doc.objects.search(name="a", other="b")
+
+
+def test_document_manager_search_raises_when_no_index_for_field(monkeypatch):
+    # The current implementation uses next(...) without default, which raises StopIteration
+    with pytest.raises(StopIteration):
+        Doc.objects.search(other="a")

@@ -38,6 +38,7 @@ pytest = "^8.3.2"
 mkdocs = "^1.6.1"
 mkdocstrings-python = "^1.11.1"
 mkdocs-material = {extras = ["imaging"], version = "^9.5.34"}
+pytest-cov = "4.1.0"
 
 [[tool.poetry.source]]
 name = "pytorch_cpu"
