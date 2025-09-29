@@ -1,7 +1,7 @@
 import random
 from collections import defaultdict
 from hashlib import md5
-from typing import Dict, List
+from typing import Any, Dict, List, Optional
 
 from django_semantic_search import Document
 from django_semantic_search.backends.base import BaseVectorSearchBackend
@@ -41,14 +41,21 @@ class MockVectorSearchBackend(BaseVectorSearchBackend):
     def __init__(self, index_configuration: IndexConfiguration):
         super().__init__(index_configuration)
         self._documents: Dict[str, Dict[DocumentID, Document]] = defaultdict(dict)
+        self.last_metadata_filter: Optional[Any] = None
 
     def configure(self):
         """No configuration is needed for the mock backend."""
         pass
 
     def search(
-        self, vector_name: str, query: Vector, limit: int = 10
+        self,
+        vector_name: str,
+        query: Vector,
+        limit: int = 10,
+        metadata_filter: Optional[Any] = None,
     ) -> List[DocumentID]:
+        # Record the last filter for assertions in tests
+        self.last_metadata_filter = metadata_filter
         random.seed(sum(query))
         max_results = min(
             limit, len(self._documents[self.index_configuration.namespace])
