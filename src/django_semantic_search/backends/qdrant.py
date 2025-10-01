@@ -1,6 +1,6 @@
 import logging
 import uuid
-from typing import List
+from typing import List, Optional, Any
 
 from django_semantic_search import Document
 from django_semantic_search.backends.base import BaseVectorSearchBackend
@@ -81,13 +81,18 @@ class QdrantBackend(BaseVectorSearchBackend):
             )
 
     def search(
-        self, vector_name: str, query: List[float], limit: int = 10
+        self,
+        vector_name: str,
+        query: List[float],
+        limit: int = 10,
+        metadata_filter: Optional[models.Filter] = None,
     ) -> List[DocumentID]:
         results = self.client.query_points(
             collection_name=self.index_configuration.namespace,
             query=query,
             using=vector_name,
             limit=limit,
+            query_filter=metadata_filter,
             with_vectors=False,
             with_payload=True,
         )

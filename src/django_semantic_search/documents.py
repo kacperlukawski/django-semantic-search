@@ -176,6 +176,7 @@ class DocumentManager(Generic[T]):
     def search(
         self,
         limit: int = 10,
+        metadata_filter=None,
         **kwargs,
     ) -> QuerySet[T]:
         """
@@ -197,7 +198,10 @@ class DocumentManager(Generic[T]):
 
         query_embedding = vector_index.get_query_embedding(field_value)
         document_ids = self.cls.backend.search(
-            vector_index.index_name, query_embedding, limit=limit
+            vector_index.index_name,
+            query_embedding,
+            limit=limit,
+            metadata_filter=metadata_filter,
         )
         if not document_ids:
             return self.cls.meta.model.objects.none()

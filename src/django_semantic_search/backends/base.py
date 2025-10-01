@@ -1,5 +1,5 @@
 import abc
-from typing import List
+from typing import Any, List, Optional
 
 from django_semantic_search.backends.types import IndexConfiguration
 from django_semantic_search.documents import Document
@@ -24,13 +24,18 @@ class BaseVectorSearchBackend(abc.ABC):
 
     @abc.abstractmethod
     def search(
-        self, vector_name: str, query: List[float], limit: int = 10
+        self,
+        vector_name: str,
+        query: List[float],
+        limit: int = 10,
+        metadata_filter: Optional[Any] = None,
     ) -> List[DocumentID]:
         """
         Search for the documents similar to the query vector in the backend.
         :param vector_name:
         :param query:
         :param limit:
+        :param metadata_filter: optional backend-specific filter (e.g. Qdrant models.Filter)
         :return:
         """
         raise NotImplementedError
